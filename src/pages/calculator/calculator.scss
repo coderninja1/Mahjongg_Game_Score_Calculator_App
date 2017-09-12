@@ -1,0 +1,47 @@
+page-calculator{
+
+	.calculator{
+		font-family: serif;
+		
+	}
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+	 .ion-card {
+	 	  border-left: 3px solid lightblue;
+	 }
+	 ion-toolbar {
+	 	  border-left: 3px solid lightblue;
+	 	  margin-left: 11px;
+	 }
+	 .pung_grid{
+	 	  border-left: 3px solid lightgreen;
+	 	  margin-left: 11px;
+	 }
+
+	 .kong_grid{
+	 	  border-left: 3px solid lightpink;
+	 	  margin-left: 11px;
+	 }
+	 ion-label{
+	 	font-size: 15px;
+	 }
+	 hr {
+		height: 1px;
+		/*border-top:1px solid lightgreen;*/
+
+		} 
+	#slide{
+		color: lightblue;
+	}
+	p{
+		color: lightblue;
+	}
+	
+	
+
+
+
+
+}

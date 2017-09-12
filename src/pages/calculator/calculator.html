@@ -1,0 +1,814 @@
+<ion-header>
+  <ion-navbar  color="royal">
+	   <button  ion-button menuToggle icon-only right>
+		<ion-icon name="md-more"></ion-icon>
+	   </button>
+    <ion-title text-center>Calculator</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content  class="calculator">
+	<ion-card round inset class="ion-card">
+		 <ion-card-header  color="dark">
+		 Game Type
+		 </ion-card-header>
+		 <hr color="primary">
+		 <ion-card-content>
+		 	<ion-row>
+			 	<ion-col>
+					<ion-item>
+					  <ion-label>Fishing</ion-label>
+					  <ion-checkbox color="dark" name="fishing" value="0" [(ngModel)]="fishinggame" 
+					  id="game-of-fishing" [disabled]='fishingcheckbox' (ngModelChange)="FishingGame($event)"></ion-checkbox>
+					</ion-item>
+				</ion-col>
+				<ion-col>
+					<ion-item>
+					  <ion-label>Mahjong</ion-label>
+					  <ion-checkbox color="dark" name="Mahjongg" value="20"  [(ngModel)]="mahjonggame" id="game-of-mahjongg" [disabled]='mahjongcheckbox' (ngModelChange)="MahjongGame($event)"></ion-checkbox>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<input type="hidden" [value]="" [(ngModel)]="gamevalue"/>
+		</ion-card-content>
+	</ion-card>
+
+
+	<ion-card class="ion-card">
+		  <ion-card-content>
+			<ion-item>
+			   <ion-label>What is the Wind of the Round?</ion-label>
+			    <ion-select [(ngModel)]="windofround"  id="wind-of-round"  
+			    (ngModelChange)="windoftheround=$event" >
+			      <ion-option value="0">--None--</ion-option>
+			      <ion-option value="1">East</ion-option>
+			      <ion-option value="2">South</ion-option>
+			      <ion-option value="3">West</ion-option>
+			      <ion-option value="4">North</ion-option>
+			    </ion-select>
+			</ion-item>
+			   <input type="hidden"  [value]="" [(ngModel)]="windoftheround">
+			<ion-item>
+				<ion-label>What is your own Wind ?</ion-label>
+				    <ion-select [(ngModel)]="windofownround" id="wind-of-own-round" 
+				     (ngModelChange)="windoftheownround=$event">
+				      <ion-option value="0">--None--</ion-option>
+				      <ion-option value="1">East</ion-option>
+				      <ion-option value="2">South</ion-option>
+				      <ion-option value="3">West</ion-option>
+				      <ion-option value="4">North</ion-option>
+				    </ion-select>
+			</ion-item>
+			  <input type="hidden"  [value]="" [(ngModel)]="windoftheownround">
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card class="ion-card">
+		 <ion-card-header  color="dark"> Pungs</ion-card-header>
+		 <hr>
+	 		<ion-card-content>				
+						<ion-item>
+			    		<ion-label>How Many Pungs Do You Have ?</ion-label>
+				 	    <ion-select [(ngModel)]="pungtotal" id="pung-total" required>
+				 	      <ion-option value="0">--None--</ion-option>
+				 	      <ion-option value="1">1 (one)</ion-option>
+				 	      <ion-option value="2">2 (Two)</ion-option>
+				 	      <ion-option value="3">3 (Three)</ion-option>
+				 	      <ion-option value="4">4 (Four)</ion-option>
+				 	    </ion-select>
+						</ion-item>		
+			</ion-card-content>
+	</ion-card>
+
+     	   <ion-toolbar  no-lines>
+			  <ion-segment [(ngModel)]="Types">
+			    <ion-segment-button value="Pungs"> 
+			      Pungs
+			    </ion-segment-button>
+			    <ion-segment-button value="kongs">
+			      Kongs
+			    </ion-segment-button>
+			  </ion-segment>
+     	   </ion-toolbar>
+
+     	   	 <ion-row>
+     	   	 	<ion-col>
+     	   	 	</ion-col>
+     	   	 </ion-row>
+ 
+			<div [ngSwitch]="Types">
+			    <ion-list *ngSwitchCase="'Pungs'" class="pung_grid" no-lines>	   
+			    	<ion-grid>
+					  <ion-row>
+					  	   <ion-item>
+						   	    <ion-label>Number</ion-label>
+							    <ion-select [(ngModel)]="group1pungs" id="group1_pungs"
+							     (ngModelChange)="group1_pungs=$event;">
+						 	      <ion-option value="0">--None--</ion-option>
+						 	      <ion-option value="2">2</ion-option>
+						 	      <ion-option value="3">3</ion-option>
+						 	      <ion-option value="4">4</ion-option>
+						 	      <ion-option value="5">5</ion-option>
+						 	      <ion-option value="6">6</ion-option>
+						 	      <ion-option value="7">7</ion-option>
+						 	      <ion-option value="8">8</ion-option>
+						 	   </ion-select>
+						 	</ion-item>
+						 	<input type="hidden"  [value]="" [(ngModel)]="group1_pungs">
+				 	  	   <ion-item>
+				 		   	    <ion-label>Is It Concealed or Exposed ?</ion-label>
+				 			    <ion-select [(ngModel)]="group1que" id="group1_que" 
+				 			     (ngModelChange)="pungschangeone($event);">
+				 		 	      <ion-option value="0">--None--</ion-option>
+				 		 	      <ion-option value="4,Concealed">Concealed</ion-option>
+				 		 	      <ion-option value="2,Exposed">Exposed</ion-option>
+				 		 	   </ion-select>
+				 		 	</ion-item>
+				  	  	 		<input type="hidden"  [value]="" [(ngModel)]="groupquetext">
+				 		        <input type="hidden"  [value]="" [(ngModel)]="group1_que_val">
+					  </ion-row>
+					</ion-grid>
+
+			    	<ion-grid>
+					  <ion-row>
+					  	   <ion-item>
+						   	    <ion-label>Number</ion-label>
+							    <ion-select [(ngModel)]="group1pungsnum" id="group1_pungsnum" 
+							    (ngModelChange)="group1_pungsnum=$event;">
+						 	      <ion-option value="0">--None--</ion-option>
+						 	      <ion-option value="1">1</ion-option>
+						 	      <ion-option value="9">9</ion-option>
+						 	   </ion-select>
+						 	</ion-item>
+						 	<input type="hidden"  [value]="" [(ngModel)]="group1_pungsnum">
+
+				 	  	   <ion-item>
+				 		   	    <ion-label>Is It Concealed or Exposed ?</ion-label>
+				 			    <ion-select [(ngModel)]="group1pungsnum_que" id="group1_pungsnum_que"
+				 			     (ngModelChange)="pungschangetwo($event);">
+				 		 	      <ion-option value="0">--None--</ion-option>
+				 		 	      <ion-option value="8,Concealed">Concealed</ion-option>
+				 		 	      <ion-option value="4,Exposed">Exposed</ion-option>
+				 		 	   </ion-select>
+				 		 	</ion-item>
+				 		 	<input type="hidden"  [value]="" [(ngModel)]="grouppungsnumquetext">
+				 			<input type="hidden"  [value]="" [(ngModel)]="group1_pungsnum_que_val">
+					  </ion-row>
+					</ion-grid>
+
+			    	<ion-grid>
+					  <ion-row>
+					  	   <ion-item>
+						   	    <ion-label>Winds</ion-label>
+							    <ion-select [(ngModel)]="group1winds"  id="group1_winds"
+							    (ngModelChange)="group1_winds=$event;">
+						 	      <ion-option value="0">--None--</ion-option>
+						 	      <ion-option value="east">East</ion-option>
+						 	      <ion-option value="south">South</ion-option>
+						 	      <ion-option value="west">West</ion-option>
+						 	      <ion-option value="north">North</ion-option>
+						 	   </ion-select>
+						 	</ion-item>
+						 	<input type="hidden"  [value]="" [(ngModel)]="group1_winds">
+				 	  	   <ion-item>
+				 		   	    <ion-label>Is It Concealed or Exposed ?</ion-label>
+				 			    <ion-select [(ngModel)]="group1windsque" id="group1_winds_que"
+				 			       (ngModelChange)="pungschangethree($event);" >
+				 		 	      <ion-option value="0">--None--</ion-option>
+				 		 	      <ion-option value="8,Concealed">Concealed</ion-option>
+				 		 	      <ion-option value="4,Exposed">Exposed</ion-option>
+				 		 	   </ion-select>
+				 		 	</ion-item>
+				 		 	<input type="hidden"  [value]="" [(ngModel)]="groupwindsquetext">
+				 			<input type="hidden"  [value]="" [(ngModel)]="group1_winds_que_val">
+					  </ion-row>
+					</ion-grid>	
+
+			    	<ion-grid>
+					  <ion-row>
+					  	   <ion-item>
+						   	    <ion-label>Dragons</ion-label>
+							    <ion-select [(ngModel)]="group1dragans" id="group1_dragans"
+							    (ngModelChange)="group1_dragans=$event;">
+						 	      <ion-option value="0">--None--</ion-option>
+						 	      <ion-option value="red">Red</ion-option>
+						 	      <ion-option value="green">Green</ion-option>
+						 	      <ion-option value="white">White</ion-option>
+						 	   </ion-select>
+						 	</ion-item>
+						 	<input type="hidden"  [value]="" [(ngModel)]="group1_dragans">
+				 	  	   <ion-item>
+				 		   	    <ion-label>Is It Concealed or Exposed ?</ion-label>
+				 			    <ion-select [(ngModel)]="group1dragansque" id="group1_dragans_que"
+				 			      (ngModelChange)="pungschangefour($event);">
+				 		 	      <ion-option value="0">--None--</ion-option>
+				 		 	      <ion-option value="8,Concealed">Concealed</ion-option>
+				 		 	      <ion-option value="4,Exposed">Exposed</ion-option>
+				 		 	   </ion-select>
+				 		 	</ion-item>
+				 		 	<input type="hidden"  [value]="" [(ngModel)]="groupdragansquetext">
+				 			<input type="hidden"  [value]="" [(ngModel)]="group1_dragans_que_val">
+					  </ion-row>
+					</ion-grid>			
+
+			    </ion-list>
+
+			    <ion-list *ngSwitchCase="'kongs'"  class="kong_grid" no-lines>
+			        	<ion-grid>
+			    		  <ion-row>
+			    		  	   <ion-item>
+			    			   	    <ion-label>Number</ion-label>
+			    				    <ion-select [(ngModel)]="congsgroup1number" id="congs_group1_number"
+			    				      (ngModelChange)="congs_group1_number=$event;">
+			    			 	      <ion-option value="0">--None--</ion-option>
+			    			 	      <ion-option value="2">2</ion-option>
+			    			 	      <ion-option value="3">3</ion-option>
+			    			 	      <ion-option value="4">4</ion-option>
+			    			 	      <ion-option value="5">5</ion-option>
+			    			 	      <ion-option value="6">6</ion-option>
+			    			 	      <ion-option value="7">7</ion-option>
+			    			 	      <ion-option value="8">8</ion-option>
+			    			 	   </ion-select>
+			    			 	</ion-item>
+				     			<input type="hidden"  [value]="" [(ngModel)]="congs_group1_number">
+
+			    	 	  	   <ion-item>
+			    	 		   	    <ion-label>Is It Concealed or Exposed ?</ion-label>
+			    	 			    <ion-select [(ngModel)]="congsgroup1que"  id="congs_group1_que"
+			    	 			     (ngModelChange)="conggroup1que($event);">
+			    	 		 	      <ion-option value="0">--None--</ion-option>
+			    	 		 	      <ion-option value="16,Concealed">Concealed</ion-option>
+			    	 		 	      <ion-option value="8,Exposed">Exposed</ion-option>
+			    	 		 	   </ion-select>
+			    	 		  </ion-item>
+				 		    <input type="hidden"  [value]="" [(ngModel)]="kongnumbertext">
+			    	 		<input type="hidden"  [value]="" [(ngModel)]="congs_group1_que_val">
+			    		  </ion-row>
+			    		</ion-grid>
+
+			    		<ion-grid id="group1_ext_que"  [hidden]="group1extque">
+			    		  <ion-row>
+			    		  	<ion-col offset-50>
+			    	 	  	   <ion-item>
+			    	 		   	    <ion-label>Is it a Concealed pung and exposed Kong ?</ion-label>
+			    	 			    <ion-select [(ngModel)]="congsgroup1extque" id="congs_group1_ext_que"
+			    	 			    (ngModelChange)="congs_group1_ext_val=$event">
+			    	 		 	      <ion-option value="0">--None--</ion-option>
+			    	 		 	      <ion-option value="16">Concealed</ion-option>
+			    	 		 	      <ion-option value="8">Exposed</ion-option>
+			    	 		 	   </ion-select>
+			    	 		  	</ion-item>
+			    	 		  <input type="hidden"  [value]="" [(ngModel)]="congs_group1_ext_val">
+			    		  	</ion-col>
+			    		  </ion-row>
+			    		</ion-grid>
+
+			        	<ion-grid>
+			    		  <ion-row>
+			    		  	   <ion-item>
+			    			   	    <ion-label>Number</ion-label>
+			    				    <ion-select [(ngModel)]="group1congssnum" id="group1_congssnum"
+			    				      (ngModelChange)="group1_congssnum=$event;">
+			    			 	      <ion-option value="0">--None--</ion-option>
+			    			 	      <ion-option value="1">1</ion-option>
+			    			 	      <ion-option value="9">9</ion-option>
+			    			 	   </ion-select>
+			    			 	</ion-item>
+				     			<input type="hidden"  [value]="" [(ngModel)]="group1_congssnum">
+
+			    	 	  	   <ion-item>
+			    	 		   	    <ion-label>Is It Concealed or Exposed ?</ion-label>
+			    	 			    <ion-select [(ngModel)]="group1congsnumque" id="group1_congsnum_que"
+			    	 			     (ngModelChange)="group1congnumque($event);" >
+			    	 		 	      <ion-option value="0">--None--</ion-option>
+			    	 		 	      <ion-option value="32,Concealed">Concealed</ion-option>
+			    	 		 	      <ion-option value="16,Exposed">Exposed</ion-option>
+			    	 		 	   </ion-select>
+			    	 		 	</ion-item>
+				 		   		<input type="hidden"  [value]="" [(ngModel)]="kongsnumberquetext">
+			    	 		 	<input type="hidden"  [value]="" [(ngModel)]="group1_congsnum_que_val">
+			    		  </ion-row>
+			    		</ion-grid>
+
+		    			<ion-grid id="congsnum_ext_que" [hidden]="congsnumextque">
+		    			  <ion-row>
+		    			    <ion-col offset-50> 
+		    		 	  	   <ion-item>
+		    		 		   	    <ion-label>Is it a Concealed pung and exposed Kong ?</ion-label>
+		    		 			    <ion-select [(ngModel)]="group1congsnumextque" id="group1_congsnum_ext_que"
+		    		 			    (ngModelChange)="group1_congsnum_ext_val=$event">
+		    		 		 	      <ion-option value="0">--None--</ion-option>
+		    		 		 	      <ion-option value="32">Concealed</ion-option>
+		    		 		 	      <ion-option value="16">Exposed</ion-option>
+		    		 		 	   </ion-select>
+		    		 		  </ion-item>
+		    		 		  <input type="hidden"  [value]="" [(ngModel)]="group1_congsnum_ext_val">
+		    		 		</ion-col>
+		    			  </ion-row>
+		    			</ion-grid>
+
+			        	<ion-grid>
+			    		  <ion-row>
+			    		  	   <ion-item>
+			    			   	    <ion-label>Winds</ion-label>
+			    				    <ion-select [(ngModel)]="congsgroup1winds" id="congs_group1_winds"
+			    				      (ngModelChange)="congs_group1_winds=$event;">
+			    			 	      <ion-option value="0">--None--</ion-option>
+			    			 	      <ion-option value="east">East</ion-option>
+			    			 	      <ion-option value="south">South</ion-option>
+			    			 	      <ion-option value="west">West</ion-option>
+			    			 	      <ion-option value="north">North</ion-option>
+			    			 	   </ion-select>
+			    			 	</ion-item>
+				     			<input type="hidden"  [value]="" [(ngModel)]="congs_group1_winds">
+
+			    	 	  	   <ion-item>
+			    	 		   	    <ion-label>Is It Concealed or Exposed ?</ion-label>
+			    	 			    <ion-select [(ngModel)]="congsgroup1windsque" id="congs_group1_winds_que"
+			    	 			    (ngModelChange)="conggroup1windsque($event);"> 
+			    	 		 	      <ion-option value="0">--None--</ion-option>
+			    	 		 	      <ion-option value="32,Concealed">Concealed</ion-option>
+			    	 		 	      <ion-option value="16,Exposed">Exposed</ion-option>
+			    	 		 	   </ion-select>
+			    	 		 	</ion-item>
+				 		   		<input type="hidden"  [value]="" [(ngModel)]="kongswindsquetext">	
+			    	 		 	<input type="hidden"  [value]="" [(ngModel)]="congs_group1_winds_que_val">
+			    		  </ion-row>
+			    		</ion-grid>
+
+				    	<ion-grid id="group1_winds_ext_que" [hidden]="group1windsextque">
+				    	  <ion-row>
+							 <ion-col offset-50> 
+				     	  	   <ion-item>
+				     		   	    <ion-label>Is it a Concealed pung and exposed Kong ?</ion-label>
+				     			    <ion-select [(ngModel)]="congsgroup1windsextque" id="congs_group1_winds_ext_que" (ngModelChange)="congs_group1_winds_ext_val=$event">
+				     		 	      <ion-option value="0">--None--</ion-option>
+				     		 	      <ion-option value="32">Concealed</ion-option>
+				     		 	      <ion-option value="16">Exposed</ion-option>
+				     		 	   </ion-select>
+				     		  </ion-item>
+				     		  <input type="hidden"  [value]="" [(ngModel)]="congs_group1_winds_ext_val">
+				     		</ion-col>
+				    	  </ion-row>
+				    	</ion-grid>	
+
+			        	<ion-grid>
+			    		  <ion-row>
+			    		  	   <ion-item>
+			    			   	    <ion-label>Dragons</ion-label>
+			    				    <ion-select [(ngModel)]="congsgroup1dragans" id="congs_group1_dragans"
+			    				      (ngModelChange)="congs_group1_dragans=$event;">
+			    			 	      <ion-option value="0">--None--</ion-option>
+			    			 	      <ion-option value="red">Red</ion-option>
+			    			 	      <ion-option value="green">Green</ion-option>
+			    			 	      <ion-option value="white">White</ion-option>
+			    			 	   </ion-select>
+			    			 	</ion-item>
+				     			 <input type="hidden"  [value]="" [(ngModel)]="congs_group1_dragans">
+
+			    	 	  	   <ion-item>
+			    	 		   	    <ion-label>Is It Concealed or Exposed ?</ion-label>
+			    	 			    <ion-select [(ngModel)]="congsgroup1dragansque" id="congs_group1_dragans_que"  (ngModelChange)="conggroup1dragansque($event);">
+			    	 		 	      <ion-option value="0">--None--</ion-option>
+			    	 		 	      <ion-option value="32,Concealed">Concealed</ion-option>
+			    	 		 	      <ion-option value="16,Exposed">Exposed</ion-option>
+			    	 		 	   </ion-select>
+			    	 		 	</ion-item>
+				 		   		<input type="hidden"  [value]="" [(ngModel)]="kongsdragansquetext">
+			    	 		 	<input type="hidden"  [value]="" [(ngModel)]="congs_group1_dragans_que_val">
+			    		  </ion-row>
+			    		</ion-grid>
+
+		    			<ion-grid id="group1_dragans_ext_que"  [hidden]="group1dragansextque">
+		    			  <ion-row>
+							 <ion-col offset-50> 
+		    		 	  	   <ion-item>
+		    		 		   	    <ion-label>Is it a Concealed pung and exposed Kong ?</ion-label>
+		    		 			    <ion-select [(ngModel)]="congsgroup1dragansextque" 
+		    		 			    id="congs_group1_dragans_ext_que"
+		    		 			     (ngModelChange)="congs_group1_dragans_ext_val=$event">
+		    		 		 	      <ion-option value="0">--None--</ion-option>
+		    		 		 	      <ion-option value="32">Concealed</ion-option>
+		    		 		 	      <ion-option value="16">Exposed</ion-option>
+		    		 		 	   </ion-select>
+		    		 		  </ion-item>
+		    		 		  <input type="hidden"  [value]="" [(ngModel)]="congs_group1_dragans_ext_val">
+							 </ion-col> 
+		    			  </ion-row>
+		    			</ion-grid>
+			    </ion-list>
+			</div>
+
+		<ion-card class="ion-card">
+			 <ion-card-header color="dark">Flowers</ion-card-header>
+			 <hr>
+			 <ion-card-content>
+	 				<ion-row>	
+						 <ion-col >  		
+			 	   	        <ion-label>How Many Flowers Do You Have ?</ion-label>
+			 	   	     </ion-col> 
+			 	   	</ion-row>	
+			 	   	
+			 	   	<ion-row>	
+			 	   	     <ion-col>  	
+			 	   	     	<button  ion-button (click)="removeItem()" class="btnSign" color="light">-</button>
+			 	   	     </ion-col> 
+			 	   	     <ion-col>
+							  <p  color="primary"> {{amount}}</p> 
+						</ion-col>  
+						<ion-col>
+							<button ion-button (click)="addItem()" class="btnSign" color="light">+</button>   
+						</ion-col> 
+	    			 </ion-row>
+	
+		 	 	<input type="hidden"  [value]="" [(ngModel)]="flowerval">
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card id="flower-group1" [hidden]="flowergroup1" class="ion-card"> 
+			 <ion-card-content>
+  				 <ion-grid>
+			   		<ion-row>
+			 		      <ion-col>	
+					   	   <ion-item>
+					 	   	    <ion-label>Number</ion-label>
+					 		    <ion-select [(ngModel)]="flowergroup1number" id="flower-group1-number"  
+					 		    (ngModelChange)="flowergroup1value=$event">
+					 	 	      <ion-option value="0">--None--</ion-option>
+					 	 	      <ion-option value="1">1</ion-option>
+					 	 	      <ion-option value="2">2</ion-option>
+					 	 	      <ion-option value="3">3</ion-option>
+					 	 	      <ion-option value="4">4</ion-option>
+					 	 	   </ion-select>
+					 	 	</ion-item>
+					 		 <input type="hidden"  [value]="" [(ngModel)]="flowergroup1value">
+		   				   </ion-col>	
+		   			  </ion-row>
+		 		    </ion-grid>		 			 	 		
+<!-- 
+ 	 	  	   <ion-item>
+ 	 		   	    <ion-label></ion-label>
+ 	 			    <ion-select [(ngModel)]="flowergroup1color" id="flower-group1-color">
+ 	 		 	      <ion-option value="0">--None--</ion-option>
+ 	 		 	      <ion-option value="red">Red</ion-option>
+ 	 		 	      <ion-option value="black">Black</ion-option>
+ 	 		 	   </ion-select>
+ 	 		 	</ion-item> -->
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card id="flower-group2" [hidden]="flowergroup2" class="ion-card"> 
+			 <ion-card-content>
+				 <ion-grid>
+			   		<ion-row>
+			 		      <ion-col >	
+					   	   <ion-item>
+					 	   	    <ion-label>Number</ion-label>
+					 		    <ion-select [(ngModel)]="flowergroup2number" id="flower-group2-number"
+					 		      (ngModelChange)="flowergroup2value=$event">
+					 	 	      <ion-option value="0">--None--</ion-option>
+					 	 	      <ion-option value="1">1</ion-option>
+					 	 	      <ion-option value="2">2</ion-option>
+					 	 	      <ion-option value="3">3</ion-option>
+					 	 	      <ion-option value="4">4</ion-option>
+					 	 	   </ion-select>
+					 	 	</ion-item>
+							 <input type="hidden"  [value]="" [(ngModel)]="flowergroup2value">
+	 	   				</ion-col>	
+	 	   			 </ion-row>
+	 	 		  </ion-grid>
+		 	 			 	 		
+	 	  	 <!--   <ion-item>
+	 		   	    <ion-label></ion-label>
+	 			    <ion-select [(ngModel)]="flowergroup2color" id="flower-group2-color">
+	 		 	      <ion-option value="0">--None--</ion-option>
+	 		 	      <ion-option value="red">Red</ion-option>
+	 		 	      <ion-option value="black">Black</ion-option>
+	 		 	   </ion-select>
+	 		 	</ion-item> -->
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card id="flower-group3" [hidden]="flowergroup3" class="ion-card"> 
+			 <ion-card-content>
+  				 <ion-grid>
+			   		<ion-row>
+			 		      <ion-col>	
+						   	   <ion-item>
+						 	   	    <ion-label>Number</ion-label>
+						 		    <ion-select [(ngModel)]="flowergroup3number" id="flower-group3-number"
+						 		      (ngModelChange)="flowergroup3value=$event">
+						 	 	      <ion-option value="0">--None--</ion-option>
+						 	 	      <ion-option value="1">1</ion-option>
+						 	 	      <ion-option value="2">2</ion-option>
+						 	 	      <ion-option value="3">3</ion-option>
+						 	 	      <ion-option value="4">4</ion-option>
+						 	 	   </ion-select>
+						 	 	</ion-item>
+						 	 	<input type="hidden"  [value]="" [(ngModel)]="flowergroup3value">
+	 	 	  				</ion-col>	
+	 	 	  		</ion-row>
+	 	 		</ion-grid>
+ 	 				 	 		
+
+ 	 	<!--   	   <ion-item>
+ 	 		   	    <ion-label></ion-label>
+ 	 			    <ion-select [(ngModel)]="flowergroup3color" id="flower-group3-color">
+ 	 		 	      <ion-option value="0">--None--</ion-option>
+ 	 		 	      <ion-option value="red">Red</ion-option>
+ 	 		 	      <ion-option value="black">Black</ion-option>
+ 	 		 	   </ion-select>
+ 	 		 	</ion-item> -->
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card id="flower-group4" [hidden]="flowergroup4" class="ion-card"> 
+			 <ion-card-content>
+				 <ion-grid>
+			   		<ion-row>
+			 		      <ion-col>	
+					   	   <ion-item>
+					 	   	    <ion-label>Number</ion-label>
+					 		    <ion-select [(ngModel)]="flowergroup4number" id="flower-group4-number"
+					 		      (ngModelChange)="flowergroup4value=$event">
+					 	 	      <ion-option value="0">--None--</ion-option>
+					 	 	      <ion-option value="1">1</ion-option>
+					 	 	      <ion-option value="2">2</ion-option>
+					 	 	      <ion-option value="3">3</ion-option>
+					 	 	      <ion-option value="4">4</ion-option>
+					 	 	   </ion-select>
+					 	 	</ion-item>
+					 	 	<input type="hidden"  [value]="" [(ngModel)]="flowergroup4value">
+ 	  					</ion-col>	
+ 	  			  </ion-row>
+ 			    </ion-grid>
+		 	 				 	 		
+ 	<!-- 	  	   <ion-item>
+ 			   	    <ion-label></ion-label>
+ 				    <ion-select [(ngModel)]="flowergroup4color" id="flower-group4-color">
+ 			 	      <ion-option value="0">--None--</ion-option>
+ 			 	      <ion-option value="red">Red</ion-option>
+ 			 	      <ion-option value="black">Black</ion-option>
+ 			 	   </ion-select>
+ 			 	</ion-item> -->
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card id="flower-group5" [hidden]="flowergroup5" class="ion-card">  
+			 <ion-card-content>
+				 <ion-grid>
+			   		<ion-row>
+			 		      <ion-col>	
+						   	   <ion-item>
+						 	   	    <ion-label>Number</ion-label>
+						 		    <ion-select [(ngModel)]="flowergroup5number" id="flower-group5-number"
+						 		      (ngModelChange)="flowergroup5value=$event">
+						 	 	      <ion-option value="0">--None--</ion-option>
+						 	 	      <ion-option value="1">1</ion-option>
+						 	 	      <ion-option value="2">2</ion-option>
+						 	 	      <ion-option value="3">3</ion-option>
+						 	 	      <ion-option value="4">4</ion-option>
+						 	 	   </ion-select>
+						 	 	</ion-item>
+						 	 	<input type="hidden"  [value]="" [(ngModel)]="flowergroup5value">
+	 	  					</ion-col>	
+	 	  			</ion-row>
+	 		      </ion-grid>
+		 	 				 	 		
+
+ 	 	  <!-- 	   <ion-item>
+ 	 		   	    <ion-label></ion-label>
+ 	 			    <ion-select [(ngModel)]="flowergroup5color" id="flower-group5-color">
+ 	 		 	      <ion-option value="0">--None--</ion-option>
+ 	 		 	      <ion-option value="red">Red</ion-option>
+ 	 		 	      <ion-option value="black">Black</ion-option>
+ 	 		 	   </ion-select>
+ 	 		 	</ion-item> -->
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card id="flower-group6" [hidden]="flowergroup6" class="ion-card"> 
+			 <ion-card-content>
+						 <ion-grid>
+					   		<ion-row>
+					 		      <ion-col>	
+							   	   <ion-item>
+							 	   	    <ion-label>Number</ion-label>
+							 		    <ion-select [(ngModel)]="flowergroup6number" id="flower-group6-number"
+							 		      (ngModelChange)="flowergroup6value=$event">
+							 	 	      <ion-option value="0">--None--</ion-option>
+							 	 	      <ion-option value="1">1</ion-option>
+							 	 	      <ion-option value="2">2</ion-option>
+							 	 	      <ion-option value="3">3</ion-option>
+							 	 	      <ion-option value="4">4</ion-option>
+							 	 	   </ion-select>
+							 	 	</ion-item>
+							 	 	<input type="hidden"  [value]="" [(ngModel)]="flowergroup6value">
+				 	  			  </ion-col>	
+			 	  			  </ion-row>
+			 			    </ion-grid>
+	 	 				 	 		
+ 	 	 <!--  	   <ion-item>
+ 	 		   	    <ion-label></ion-label>
+ 	 			    <ion-select [(ngModel)]="flowergroup6color" id="flower-group6-color">
+ 	 		 	      <ion-option value="0">--None--</ion-option>
+ 	 		 	      <ion-option value="red">Red</ion-option>
+ 	 		 	      <ion-option value="black">Black</ion-option>
+ 	 		 	   </ion-select>
+ 	 		 		</ion-item> -->
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card id="flower-group7" [hidden]="flowergroup7" class="ion-card"> 
+			 <ion-card-content>
+	   				 <ion-grid>
+	 			   		<ion-row>
+ 			 		      <ion-col>	
+						   	   <ion-item>
+						 	   	    <ion-label>Number</ion-label>
+						 		    <ion-select [(ngModel)]="flowergroup7number" id="flower-group7-number"
+						 		      (ngModelChange)="flowergroup7value=$event">
+						 	 	      <ion-option value="0">--None--</ion-option>
+						 	 	      <ion-option value="1">1</ion-option>
+						 	 	      <ion-option value="2">2</ion-option>
+						 	 	      <ion-option value="3">3</ion-option>
+						 	 	      <ion-option value="4">4</ion-option>
+						 	 	   </ion-select>
+						 	 	</ion-item>
+		 	 						<input type="hidden"  [value]="" [(ngModel)]="flowergroup7value">
+	 	 	  				</ion-col>	
+	 	 	  			  </ion-row>
+	 	 			    </ion-grid>
+			 	 				 	 		
+<!-- 
+ 	 	  	   <ion-item>
+ 	 		   	    <ion-label></ion-label>
+ 	 			    <ion-select [(ngModel)]="flowergroup7color" id="flower-group7-color">
+ 	 		 	      <ion-option value="0">--None--</ion-option>
+ 	 		 	      <ion-option value="red">Red</ion-option>
+ 	 		 	      <ion-option value="black">Black</ion-option>
+ 	 		 	   </ion-select>
+ 	 		 	</ion-item> -->
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card id="flower-group8" [hidden]="flowergroup8" class="ion-card"> 
+			 <ion-card-content>
+			 		<ion-grid>
+					  <ion-row>
+					   <ion-col>
+					   	   <ion-item>
+					 	   	    <ion-label>Number</ion-label>
+					 		    <ion-select [(ngModel)]="flowergroup8number" id="flower-group8-number"
+					 		      (ngModelChange)="flowergroup8value=$event">
+					 	 	      <ion-option value="0">--None--</ion-option>
+					 	 	      <ion-option value="1">1</ion-option>
+					 	 	      <ion-option value="2">2</ion-option>
+					 	 	      <ion-option value="3">3</ion-option>
+					 	 	      <ion-option value="4">4</ion-option>
+					 	 	   </ion-select>
+					 	 	</ion-item>
+					 	 	<input type="hidden"  [value]="" [(ngModel)]="flowergroup8value">
+		  				</ion-col>	
+		  			  </ion-row>
+				    </ion-grid>
+					 	 			 	 	
+ 	 	  	  <!--  <ion-item>
+ 	 		   	    <ion-label></ion-label>
+ 	 			    <ion-select [(ngModel)]="flowergroup8color" id="flower-group8-color">
+ 	 		 	      <ion-option value="0">--None--</ion-option>
+ 	 		 	      <ion-option value="red">Red</ion-option>
+ 	 		 	      <ion-option value="black">Black</ion-option>
+ 	 		 	   </ion-select>
+ 	 		 	</ion-item> -->
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card class="ion-card">
+			 <ion-card-header>Pairs</ion-card-header>
+			 <hr>
+			 <ion-card-content>
+			    	<ion-grid>
+					  <ion-row>
+					  	   <ion-item>
+						   	    <ion-label>Number</ion-label>
+							    <ion-select [(ngModel)]="pairofnumber" id="pair-of-number"
+							      (ngModelChange)="NumberChange($event);pairofnumber=$event" [disabled]='pairofnumbercheckbox'>
+						 	      <ion-option value="0">--None--</ion-option>
+						 	      <ion-option value="1">1</ion-option>
+						 	      <ion-option value="2">2</ion-option>
+						 	      <ion-option value="3">3</ion-option>
+						 	      <ion-option value="4">4</ion-option>
+						 	      <ion-option value="5">5</ion-option>
+						 	      <ion-option value="6">6</ion-option>
+						 	      <ion-option value="7">7</ion-option>
+						 	      <ion-option value="8">8</ion-option>
+						 	      <ion-option value="9">9</ion-option>
+						 	   </ion-select>
+						 	</ion-item>
+		 				 	<input type="hidden"  [value]="" [(ngModel)]="pairofnumber">
+
+				 	  	   <ion-item>
+				 		   	    <ion-label>Winds</ion-label>
+				 			    <ion-select [(ngModel)]="pairofwinds" id="pair-of-winds"
+				 			    (ngModelChange)="WindsChange($event);pairofwinds=$event" [disabled]='pairofwindscheckbox'>
+				 		 	      <ion-option value="0">--None--</ion-option>
+				 		 	      <ion-option value="1">East</ion-option>
+				 		 	      <ion-option value="2">South</ion-option>
+				 		 	      <ion-option value="3">West</ion-option>
+				 		 	      <ion-option value="4">North</ion-option>
+				 		 	   </ion-select>
+				 		 	</ion-item>
+		 				 	<input type="hidden"  [value]="" [(ngModel)]="pairofwinds">
+					  </ion-row>
+					</ion-grid>	
+						
+					<ion-grid>	
+						<ion-row>
+						 <ion-col width-50>
+					  	   <ion-item>
+						   	    <ion-label>Dragons</ion-label>
+							    <ion-select [(ngModel)]="pairofdragan" id="pair-of-dragan"
+							 	   (ngModelChange)="DragansChange($event);draganpoint=$event" 
+							 	   [disabled]='pairofdragancheckbox'>
+						 	      <ion-option value="0">--None--</ion-option>
+						 	      <ion-option value="red">Red</ion-option>
+						 	      <ion-option value="green">Green</ion-option>
+						 	      <ion-option value="white">White</ion-option>
+						 	   </ion-select>
+						 	</ion-item>
+			 	 			<input type="hidden"  [value]="" [(ngModel)]="draganpoint">
+			 	 			<input type="hidden"  [value]="" [(ngModel)]="pairdragonpoint">
+			 	 		 </ion-col>
+ 					  	</ion-row>
+ 					</ion-grid>	
+			 </ion-card-content>
+		</ion-card>
+
+		<ion-card [hidden]="finalscorecard">
+			 <ion-card-header color="primary">Final Score</ion-card-header>
+			 <ion-card-content>
+				<ion-item>
+				  <ion-input type="text" [(ngModel)]="totalscore"  readonly></ion-input>
+				</ion-item>
+			</ion-card-content>
+		</ion-card>
+	
+		  <ion-list>
+		    <ion-item-sliding #item>
+		      <ion-item>
+		        <ion-row>
+                 <ion-col>
+       		         <button ion-button block  color="danger" (click)="Scoreloading();CalculateScore();" id="calculate"  class="Calculator" type="submit">Calculate</button>
+       		     </ion-col>
+       		     <ion-col>
+       		     	<ion-item id="slide">
+       		     		Slide to Reset
+					</ion-item>
+       		     </ion-col>
+       		   </ion-row>
+		      </ion-item>
+		      <ion-item-options icon-left side="left">
+		        <button ion-button (click)="RefreshPage(item)" color="danger">
+		        	<ion-icon name="refresh-circle"></ion-icon>
+		        	Reset</button>
+		      </ion-item-options>
+
+		      <ion-item-options icon-left side="right">
+		        <button ion-button (click)="RefreshPage(item)" color="danger">
+		        	<ion-icon name="refresh-circle"></ion-icon>
+		        	Reset</button>
+		      </ion-item-options>
+		    </ion-item-sliding>
+		  </ion-list>
+
+         <ion-fab right bottom>
+	         <button ion-fab  color="danger" (click)="scrollToTop()">
+	         	<ion-icon name="ios-arrow-dropup">
+	         	</ion-icon>
+	         </button>
+	         <ion-fab-list side="left">
+	         </ion-fab-list>
+        </ion-fab> 
+
+</ion-content>
+
+
+
+<!-- 
+	<ion-fab right bottom >
+	    <button ion-fab color="danger"><ion-icon name="arrow-dropleft"></ion-icon></button>
+	    <ion-fab-list side="left">
+	      <button ion-fab color="danger"><ion-icon name="logo-facebook"></ion-icon></button>
+	      <button ion-fab color="danger"><ion-icon name="logo-twitter"></ion-icon></button>
+	      <button ion-fab color="danger"><ion-icon name="logo-googleplus"></ion-icon></button>
+	    </ion-fab-list>
+	</ion-fab>
+ -->
+
+<!-- <ion-footer>
+  <ion-toolbar color="dark">
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-footer>
+ -->
+

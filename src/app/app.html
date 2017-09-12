@@ -1,0 +1,44 @@
+<ion-menu side="right" [content]="content">
+
+<!-- The side menu title -->
+  <ion-toolbar color="royal" class="header-menu">
+    <ion-title text-center>
+    Mahjongg
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-content padding class="custom">
+    <ion-list no-lines>
+      <button menuClose ion-item icon-left *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+      <button menuClose ion-item icon-left *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.homepage)">
+         <ion-icon name="home"></ion-icon>
+         Home
+       </button>
+
+      <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.calculatorpage)">
+         <ion-icon name="calculator"></ion-icon>
+         Calculator
+       </button>
+       <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.aboutpage)">
+         <ion-icon name="information-circle"></ion-icon>
+         About
+       </button>
+       <button menuClose ion-item icon-left (click)="nav.setRoot(pages2.contactpage)">
+         <ion-icon name="contacts"></ion-icon>
+         Contact
+       </button>
+       <button menuClose ion-item icon-left (click)="ExitApp()">
+        <ion-icon name="md-exit"></ion-icon>
+        Exit
+       </button>
+    </ion-list>
+
+  </ion-content>
+
+</ion-menu>
+<ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>
